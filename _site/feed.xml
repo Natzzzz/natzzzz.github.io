@@ -3,10 +3,10 @@
   <channel>
     <title></title>
     <description>Blogging about stuffs</description>
-    <link>/natzzzz.github.io/</link>
-    <atom:link href="/natzzzz.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 18 Apr 2021 00:02:36 +0200</pubDate>
-    <lastBuildDate>Sun, 18 Apr 2021 00:02:36 +0200</lastBuildDate>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 22 Apr 2021 08:42:04 +0200</pubDate>
+    <lastBuildDate>Thu, 22 Apr 2021 08:42:04 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -26,8 +26,8 @@ To add new posts, simply add a file in the &lt;code class=&quot;language-plainte
 
 </description>
         <pubDate>Sun, 10 Nov 2013 11:18:00 +0100</pubDate>
-        <link>/natzzzz.github.io/thriller/comedy/horror/2013/11/10/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">/natzzzz.github.io/thriller/comedy/horror/2013/11/10/welcome-to-jekyll.html</guid>
+        <link>/thriller/comedy/horror/2013/11/10/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">/thriller/comedy/horror/2013/11/10/welcome-to-jekyll.html</guid>
         
         
         <category>Thriller</category>

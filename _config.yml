@@ -6,7 +6,7 @@ markdown: kramdown
 highlighter: rouge
 logo: false
 paginate: 15
-baseurl: /natzzzz.github.io
+baseurl: ""
 domain_name: "http://github.com/natzzzz"
 google_analytics: "UA-XXXXXXXX-X"
 plugins: [jekyll-paginate]
