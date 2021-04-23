@@ -1,6 +1,7 @@
 ---
 layout: page
-title: About me 
+title: $~ whoami
 ---
 
-Hey, my name's Nathan and i'm mainly into malwares & CTFs sometimes. I'll try to post things on this website when i find something interesting, or just some of my writeups. 
+Hey, my name's Nathan and i'm mainly into malwares & sometimes CTFs. I'll try to post on this website when i find something interesting, or just some of my writeups. 
+Enjoy !
