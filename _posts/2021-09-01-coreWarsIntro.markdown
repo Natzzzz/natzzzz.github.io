@@ -103,6 +103,7 @@ The *spl* opcode is used to create separate processes, so that your code does tw
         process   └───┘   │     ┌───┐  ┌───► ...
                           └────►│spl├──┤
                                 └───┘  └───► ...
+</pre>
 
 Obviously, it'll only execute one instruction at a time, but it will alternate between its different processes. 
 

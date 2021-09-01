@@ -5,8 +5,8 @@
     <description>Malwares &amp; ctfs</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 01 Sep 2021 22:49:53 +0200</pubDate>
-    <lastBuildDate>Wed, 01 Sep 2021 22:49:53 +0200</lastBuildDate>
+    <pubDate>Wed, 01 Sep 2021 23:07:34 +0200</pubDate>
+    <lastBuildDate>Wed, 01 Sep 2021 23:07:34 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -111,37 +111,32 @@ dat 9 ; tries to kill the process at 9
         process   └───┘   │     ┌───┐  ┌───► ...
                           └────►│spl├──┤
                                 └───┘  └───► ...
+&lt;/pre&gt;
 
-Obviously, it&apos;ll only execute one instruction at a time, but it will alternate between its different processes. 
+&lt;p&gt;Obviously, it’ll only execute one instruction at a time, but it will alternate between its different processes.&lt;/p&gt;
 
-```assembly
-warrior 1 ; -&amp;gt; Process A
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;warrior 1 ; -&amp;gt; Process A
 warrior 2 ; -&amp;gt; ...
 warrior 1 ; -&amp;gt; Process B
 warrior 2 ; -&amp;gt; ...
 warrior 1 ; -&amp;gt; Process A
 warrior 2 ; -&amp;gt; ...
-```
+&lt;/code&gt;&lt;/pre&gt;
 
-### nop
+&lt;h3 id=&quot;nop&quot;&gt;nop&lt;/h3&gt;
 
-the nop, as most of you already know it, is pretty self-explanatory: NO-Operation. It just does absolutely nothing. wow. 
+&lt;p&gt;the nop, as most of you already know it, is pretty self-explanatory: NO-Operation. It just does absolutely nothing. wow.&lt;/p&gt;
 
-Great, now you should know everything about redcode (well, actually not. There&apos;s a lot more to know, but you already know the basics)
+&lt;p&gt;Great, now you should know everything about redcode (well, actually not. There’s a lot more to know, but you already know the basics)&lt;/p&gt;
 
-If you&apos;d like to know more about redcode and core wars in general, you definitely have to check the links below. 
+&lt;p&gt;If you’d like to know more about redcode and core wars in general, you definitely have to check the links below.&lt;/p&gt;
 
-Hope you liked that post, don&apos;t hesitate to hit me up if you have suggestions, or if i could help you in any way. 
+&lt;p&gt;Hope you liked that post, don’t hesitate to hit me up if you have suggestions, or if i could help you in any way.&lt;/p&gt;
 
-# Ressources / references
+&lt;h1 id=&quot;ressources--references&quot;&gt;Ressources / references&lt;/h1&gt;
 
-[The beginner&apos;s guide to redcode ]: https://vyznev.net/corewar/guide.html
+&lt;p&gt;[Wikipedia - Core wars] : https://en.wikipedia.org/wiki/Core_War&lt;/p&gt;
 
-[Koth.org&apos;s corewars for dummies ]: http://www.koth.org/info/corewars_for_dummies/dummies.html
-
-[Wikipedia - Core wars] : https://en.wikipedia.org/wiki/Core_War
-
-&lt;/pre&gt;
 </description>
         <pubDate>Wed, 01 Sep 2021 14:00:00 +0200</pubDate>
         <link>/misc/2021/09/01/coreWarsIntro.html</link>
