@@ -5,8 +5,8 @@
     <description>Malwares &amp; ctfs</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 01 Sep 2021 23:24:02 +0200</pubDate>
-    <lastBuildDate>Wed, 01 Sep 2021 23:24:02 +0200</lastBuildDate>
+    <pubDate>Wed, 01 Sep 2021 23:36:21 +0200</pubDate>
+    <lastBuildDate>Wed, 01 Sep 2021 23:36:21 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -53,7 +53,7 @@
 
 &lt;h3 id=&quot;mov&quot;&gt;mov&lt;/h3&gt;
 
-&lt;p&gt;The mov operation will copy the instruction from the &lt;source /&gt; to the &lt;destination&gt;.&lt;/destination&gt;&lt;/p&gt;
+&lt;p&gt;The mov operation will copy the instruction from the source (operand A) to the destination (operand b).&lt;/p&gt;
 
 &lt;p&gt;Have a look at a very (very) simple warrior called &lt;em&gt;The Imp&lt;/em&gt;. It only consists of a single instruction:&lt;/p&gt;
 

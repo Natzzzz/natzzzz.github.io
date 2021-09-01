@@ -41,7 +41,7 @@ the *dat* instruction kills the current task. One of the most useful ones out th
 
 ### mov
 
-The mov operation will copy the instruction from the <source> to the <destination>.  
+The mov operation will copy the instruction from the source (operand A) to the destination (operand b).  
 
 Have a look at a very (very) simple warrior called *The Imp*. It only consists of a single instruction: 
 
