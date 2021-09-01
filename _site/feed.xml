@@ -5,9 +5,152 @@
     <description>Malwares &amp; ctfs</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 29 May 2021 14:59:06 +0200</pubDate>
-    <lastBuildDate>Sat, 29 May 2021 14:59:06 +0200</lastBuildDate>
+    <pubDate>Wed, 01 Sep 2021 22:49:53 +0200</pubDate>
+    <lastBuildDate>Wed, 01 Sep 2021 22:49:53 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Core wars - your new favorite game</title>
+        <description>&lt;p&gt;Last year while playing &lt;a href=&quot;http://rada.re/con&quot;&gt;r2con&lt;/a&gt; ctf, i saw some people playing an obscure assembly-like game I didn’t understand at all. It actually wasn’t assembly, it was Redcode, and the game was called Core War.&lt;/p&gt;
+
+&lt;p&gt;Here’s how it works: two programs (called warriors) fight against each other in a small simulated memory space (called the core).&lt;/p&gt;
+
+&lt;p&gt;Each round, the warriors execute one instruction until one of them can’t play anymore, for example because its instruction pointer got corrupted by the opponent.&lt;/p&gt;
+
+&lt;p&gt;At the beginning, each warrior is loaded into the core at a random address. There is no absolute address, thus you won’t be able to specify a precise one, like 0x…… in the usual asm languages. The core is a sort of array, in which there is no beginning and no end. In fact, if we wanted to represent what the core looked like, it would rather look like a sort of pipe, or a sphere. For your warrior, the address where it currently is will be 0, the next one will be 1 and the previous will be -1, and so on.&lt;/p&gt;
+
+&lt;p&gt;The format is &lt;source /&gt;, &lt;destination&gt;, like in x64 asm. Don&apos;t forget that, fellow x86 enthusiasts.&lt;/destination&gt;&lt;/p&gt;
+
+&lt;p&gt;When you create your own warrior, there are 3 main strategies that you might use:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Rock&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Rock warriors try to take as much addresses in the middle of the core (it is statistically more likely that the opponent will spawn around the middle), hoping that it’ll kill the other warrior quickly.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Paper&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Unlike the rock strategy, this one is trying to survive as much as possible, not to quickly kill its opponent. The most usual way to do this is by writing in as many addresses as it can. Remember the &lt;em&gt;spl&lt;/em&gt; instruction will be very useful for this one.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Scissors&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Here’s my fav one. It scans the core, trying to find occupied addresses. Once it finds an address where its opponent might be, it will bomb as much as it can around that address, hoping to kill it. Pretty cool, huh ?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;opcodes&quot;&gt;Opcodes&lt;/h1&gt;
+
+&lt;p&gt;As in every assembly language, you have a lot of different opcodes, and every one of them serves a different purpose. You can have a look at all of them &lt;a href=&quot;https://esolangs.org/wiki/Redcode#Instructions&quot;&gt;here&lt;/a&gt;. Some of them are also used in assembly, like mov, add, sub, mul, div, mod, jmp, jmz (equivalent to jz in asm), jmn (=jnz), cmp and nop.&lt;/p&gt;
+
+&lt;p&gt;You’ve certainly already used most of the above opcodes, but if you take a closer look at the full list, you’ll see that the other half of these opcodes are completely unknown.&lt;/p&gt;
+
+&lt;h3 id=&quot;dat&quot;&gt;dat&lt;/h3&gt;
+
+&lt;p&gt;the &lt;em&gt;dat&lt;/em&gt; instruction kills the current task. One of the most useful ones out there.&lt;/p&gt;
+
+&lt;h3 id=&quot;mov&quot;&gt;mov&lt;/h3&gt;
+
+&lt;p&gt;The mov operation will copy the instruction from the &lt;source /&gt; to the &lt;destination&gt;.&lt;/destination&gt;&lt;/p&gt;
+
+&lt;p&gt;Have a look at a very (very) simple warrior called &lt;em&gt;The Imp&lt;/em&gt;. It only consists of a single instruction:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;;name The Imp
+mov 0, 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yup, that’s it, nothing more.&lt;/p&gt;
+
+&lt;p&gt;The explanation will be pretty straightforward: it just copies the instruction of the address where it is (then 0) to the address just next (1). To be more clear: it copies itself into the next address, which creates an infinite loop, as the core doesn’t have any beginning, nor end.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-sub-and-mul&quot;&gt;add, sub and mul&lt;/h3&gt;
+
+&lt;p&gt;This will add what’s on the address at 4 to what’s in the address 2.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;add 4, 2 ; adds what&apos;s on the address at 4 to what&apos;s on the address at 2. 
+sub 3, 4 ; Same thing as the add, but it&apos;s a substraction. Nothing really hard in there. 
+mul 2, 1 ; oh, really ? I&apos;m sure you guessed what this is about. 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;div&quot;&gt;div&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;div&lt;/em&gt; works the same way as the above, but there’s a little trick with it: if the result is a float, it will be rounded down: so if you get 3.9, it will be 3.&lt;/p&gt;
+
+&lt;p&gt;Another thing to know is that you can’t divide by 0. If you still do it, your program will stop its execution. Don’t divide by 0, then.&lt;/p&gt;
+
+&lt;h3 id=&quot;mod&quot;&gt;mod&lt;/h3&gt;
+
+&lt;p&gt;If you don’t already know modulo (pretty sure it isn’t the case if you’re reading this), it will divide the first argument by the second, and store the remainder in the destination.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;mod 7, 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;jmp-jmz-jmn-djn&quot;&gt;jmp, jmz, jmn, djn&lt;/h3&gt;
+
+&lt;p&gt;The jmp instruction is used to move to another address (remember, we only use relative addresses in redcode). The specificity is that you only need to add the &lt;source /&gt; address. You still can put some code at the &lt;destination&gt;, but i guess it&apos;ll just be ignored.&lt;/destination&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-assembly&quot;&gt;jmp 4 ; -&amp;gt; jump 4 addresses after the current one
+mov 2, -1 ; -&amp;gt; move &quot;dat 9&quot; to -1 -&amp;gt; what was jmp 4 until now
+jmp -1 ; jump to the precedent address
+dat 9 ; tries to kill the process at 9
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;spl&quot;&gt;spl&lt;/h2&gt;
+
+&lt;p&gt;I had never seen such an opcode before playing this game. It would be actually totally useless in other situations, because we always have full control over the instruction pointer. However, due to corewars being a turn to turn game, if you want to do two things in the same time, you’ll have either to do it manually, (i.e. writing one line per process), OR use the &lt;em&gt;spl&lt;/em&gt; opcode.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;spl&lt;/em&gt; opcode is used to create separate processes, so that your code does two separate things, one at a time.&lt;/p&gt;
+
+&lt;pre&gt;
+                                ┌───┐  ┌───► ...
+                          ┌────►│spl├──┤
+                  ┌───┐   │     └───┘  └───► ...
+  ───── single ───┤spl├───┤
+        process   └───┘   │     ┌───┐  ┌───► ...
+                          └────►│spl├──┤
+                                └───┘  └───► ...
+
+Obviously, it&apos;ll only execute one instruction at a time, but it will alternate between its different processes. 
+
+```assembly
+warrior 1 ; -&amp;gt; Process A
+warrior 2 ; -&amp;gt; ...
+warrior 1 ; -&amp;gt; Process B
+warrior 2 ; -&amp;gt; ...
+warrior 1 ; -&amp;gt; Process A
+warrior 2 ; -&amp;gt; ...
+```
+
+### nop
+
+the nop, as most of you already know it, is pretty self-explanatory: NO-Operation. It just does absolutely nothing. wow. 
+
+Great, now you should know everything about redcode (well, actually not. There&apos;s a lot more to know, but you already know the basics)
+
+If you&apos;d like to know more about redcode and core wars in general, you definitely have to check the links below. 
+
+Hope you liked that post, don&apos;t hesitate to hit me up if you have suggestions, or if i could help you in any way. 
+
+# Ressources / references
+
+[The beginner&apos;s guide to redcode ]: https://vyznev.net/corewar/guide.html
+
+[Koth.org&apos;s corewars for dummies ]: http://www.koth.org/info/corewars_for_dummies/dummies.html
+
+[Wikipedia - Core wars] : https://en.wikipedia.org/wiki/Core_War
+
+&lt;/pre&gt;
+</description>
+        <pubDate>Wed, 01 Sep 2021 14:00:00 +0200</pubDate>
+        <link>/misc/2021/09/01/coreWarsIntro.html</link>
+        <guid isPermaLink="true">/misc/2021/09/01/coreWarsIntro.html</guid>
+        
+        
+        <category>misc</category>
+        
+      </item>
     
       <item>
         <title>Patching a binary using r2</title>

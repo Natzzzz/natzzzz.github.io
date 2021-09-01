@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>natzzzz - Malwares & ctfs</title>
+    <meta name="description" content="Malwares & ctfs" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css " />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Patching a binary using r2</h1>
+            <section class="post-meta">
+                
+                    on reversing and ctfs
+                
+                <time class="post-date" datetime="2020-12-22">22 Dec 2020</time>
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="">
+                
+                    <span class="blog-title">natzzzz</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2020-12-22">22 Dec 2020</time>
+            
+                on reversing and ctfs
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Patching a binary using r2</h1> -->
+
+        <section class="post-content">
+            <p>When doing binary exploitation challenges, you can’t always just trick the program to make him do what you want it to do. Sometimes, it’s easier and faster to change it directly in order to get the result we expect.</p>
+
+<p>In this little tutorial, I’ll teach you how to patch an ELF binary with radare2 , an awesome reverse engineering framework that is sooo useful when playing ctfs, doing malware analysis or really anything that involves assembly at some point.</p>
+
+<p>The sample I’ll use for this tutorial is from the PicoCTF 2018.</p>
+
+<p>Always start by running your binary, so that you understand what’s going on.</p>
+
+<p><img src="/assets/images/patchingBinaryR2_1.png" alt="" /> 
+Sooo, it prints the name of the challenge and the string “calculating key…”, then it waits for a second before to print the last line. Strange, right ? Let’s open r2 now, to see what’s happening inside.<br />
+<img src="/assets/images/patchingBinaryR2_2.png" alt="" />
+Use the aaa command to analyze your binary. It will detect and analyze the functions, the strings and pretty much everything inside of the program, to make it easier to go through it in our analysis. Then, use the command afl to list all the functions. You’ll see the main function, which is the spine of our program, and from which we’ll see most of the functions that will be called. We have to go to that main function, now that we know it exists. To do so, we’ll seek to that place, using the letter S, as shown below:<br />
+<img src="/assets/images/patchingBinaryR2_3.png" alt="" />
+I also printed the disas of that main function, to globally understand the flow of the program, and to see what other functions are called. With that disassembly, we can understand what the problem is: the amount of time that is given by the sym.set_timer function is too small, and the program stops its execution before that the sym.print_flag function (our objective) could be called.<br />
+Now that we understood what the problem was, I think about two ways to patch it, in order to get the output of the print_flag function. Of course, you could use gdb and redirect the instruction pointer directly to that function, but we only want to use r2 here, because we love it, right ?</p>
+<ul>
+  <li>The first way would be to seek to the set_timer function and change directly the time that is given to the timer, which is only one second for now, and try to make it bigger.</li>
+  <li>The second way would be to just nop out the set_timer function, so that when the instruction pointer comes to the address 0x00400845, It just won’t do anything and continue. That’s what we’re going to do.
+Using a veeeeery great functionality of r2, we’ll nop everything that is on the address 0x00400845, as explained before.<br />
+<img src="/assets/images/patchingBinaryR2_4.png" alt="" />
+Now, we have our target (0x00400845), we just have to go right here, I just printed the disas of that address to be sure it was the right one, and now it’s time to patch, but first, we have to reopen r2 in write mode ! To do so, use the command oo+, and if you don’t have any output, you’re good to go.
+<img src="/assets/images/patchingBinaryR2_5.png" alt="" />
+This magic command is the wao nop I used in the second line. It writes over your opcode with nops, which is exactly what we want to do.<br />
+To be sure everything is ok, re-print the disassembly of our address, aaaaand, it worked. Great ! Now, just quit (command q) and it’s time to see if what we did worked.
+<img src="/assets/images/patchingBinaryR2_6.png" alt="" />
+Whooo ! It still takes a few seconds before the flag is printed, but it works and we get the flag !<br />
+For further documentation, you could read <a href="https://r2wiki.readthedocs.io/en/latest/options/w/wao-op/">this</a>, and more globally <a href="https://radare.gitbooks.io/radare2book/content/">the documentation of r2</a>, it’s a great ressource if you need to get better at reverse engineering. Have fun !</li>
+</ul>
+
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <span class="hidden">natzzzz's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> natzzzz </h4>
+                    <!-- Author Bio -->
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Contact</h4>
+    <a href="https://keybase.io/natzzzz"><img src="https://img.icons8.com/material-rounded/24/000000/key--v1.png"></a>
+    <a href="https://github.com/natzzzz"><img src="https://img.icons8.com/material-outlined/24/000000/github.png"></a>
+    <a href="https://twitter.com/natnatzzzz"><img src="https://img.icons8.com/material-rounded/24/000000/twitter-squared.png"></a>
+</section>
+
+
+            <!-- Disqus comments -->
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="">natzzzz</a> &copy; 
+              2021 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using 
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>   
+</body>
+</html>

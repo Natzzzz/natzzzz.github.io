@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/natzzzz
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://natzzzz.github.io
+  * I am natzzzz (https://keybase.io/natzzzz) on keybase.
+  * I have a public key ASAi3pUDGnQ45RDkeghu5Ymij6FS5bg8Z91J1_u9mnqSSgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012022de95031a7438e510e47a086ee589a28fa152e5b83c67dd49d7fbbd9a7a924a0a",
+      "host": "keybase.io",
+      "kid": "012022de95031a7438e510e47a086ee589a28fa152e5b83c67dd49d7fbbd9a7a924a0a",
+      "uid": "82832f3f124ef1c0fd0e3d894091f119",
+      "username": "natzzzz"
+    },
+    "merkle_root": {
+      "ctime": 1625551708,
+      "hash": "7effdacfd5b8540901b1bb08156e36cd3bd94cf5e8e0587df35c7a4c0476ae62edce0c51cdb503ee54022d2a2c32e5f2c46fdf32b699fb458d3970daa7d34c08",
+      "hash_meta": "83189b1b4730535962649f9f58b9796406d5286cf5e2958cfe4e0ce4ea270504",
+      "seqno": 20319584
+    },
+    "service": {
+      "entropy": "PwlrVRVqOsi5HRbirOE6J6QD",
+      "hostname": "natzzzz.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.7.0"
+  },
+  "ctime": 1625551726,
+  "expire_in": 504576000,
+  "prev": "79e0b0ae0fd3bff8a66d33739e19df6d5691a52e9d3b52723a2782a3595ccb6d",
+  "seqno": 10,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgIt6VAxp0OOUQ5HoIbuWJoo+hUuW4PGfdSdf7vZp6kkoKp3BheWxvYWTESpcCCsQgeeCwrg/Tv/imbTNznhnfbVaRpS6dO1JyOieCo1lcy23EIF42YW7FoSvWfnwmUi6kTFMr8/drSAn96p9Ko7buCHHyAgHCo3NpZ8RAEchYv72pIIVRAeW8AS+bkJvxlxzQwS8T+MW4Jv15rvvueMcoi5GaVr+qxRsiftF5DYamUM+z9VSPTfQBnO1bBqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEICLW1co5VQP5CTJTAWBAoYS3tHrIvborgLK3Pd3ENpGio3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/natzzzz
+
+==================================================================
