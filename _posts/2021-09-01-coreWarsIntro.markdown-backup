@@ -95,6 +95,16 @@ I had never seen such an opcode before playing this game. It would be actually t
 
 The *spl* opcode is used to create separate processes, so that your code does two separate things, one at a time. 
 
+<pre>
+                                ┌───┐  ┌───► ...
+                          ┌────►│spl├──┤
+                  ┌───┐   │     └───┘  └───► ...
+  ───── single ───┤spl├───┤
+        process   └───┘   │     ┌───┐  ┌───► ...
+                          └────►│spl├──┤
+                                └───┘  └───► ...
+</pre>
+
 Obviously, it'll only execute one instruction at a time, but it will alternate between its different processes. 
 
 ```assembly
@@ -122,5 +132,5 @@ Hope you liked that post, don't hesitate to hit me up if you have suggestions, o
 
 [Koth.org's corewars for dummies ]: http://www.koth.org/info/corewars_for_dummies/dummies.html
 
-[Wikipedia - Core wars]: https://en.wikipedia.org/wiki/Core_War
+[Wikipedia - Core wars] : https://en.wikipedia.org/wiki/Core_War
 

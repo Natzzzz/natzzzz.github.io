@@ -149,16 +149,6 @@ dat 9 ; tries to kill the process at 9
 
 <p>The <em>spl</em> opcode is used to create separate processes, so that your code does two separate things, one at a time.</p>
 
-<pre>
-                                ┌───┐  ┌───► ...
-                          ┌────►│spl├──┤
-                  ┌───┐   │     └───┘  └───► ...
-  ───── single ───┤spl├───┤
-        process   └───┘   │     ┌───┐  ┌───► ...
-                          └────►│spl├──┤
-                                └───┘  └───► ...
-</pre>
-
 <p>Obviously, it’ll only execute one instruction at a time, but it will alternate between its different processes.</p>
 
 <pre><code class="language-assembly">warrior 1 ; -&gt; Process A
@@ -180,8 +170,6 @@ warrior 2 ; -&gt; ...
 <p>Hope you liked that post, don’t hesitate to hit me up if you have suggestions, or if i could help you in any way.</p>
 
 <h1 id="ressources--references">Ressources / references</h1>
-
-<p>[Wikipedia - Core wars] : https://en.wikipedia.org/wiki/Core_War</p>
 
 
         </section>
