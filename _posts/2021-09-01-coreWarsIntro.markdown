@@ -128,10 +128,8 @@ Hope you liked that post, don't hesitate to hit me up if you have suggestions, o
 
 # Ressources / references
 
-[The beginner's guide to redcode ](https://vyznev.net/corewar/guide.html)
-
-[Koth.org's corewars for dummies ](http://www.koth.org/info/corewars_for_dummies/dummies.html)
-
-[Wikipedia - Core wars](https://en.wikipedia.org/wiki/Core_War)
+[The beginner's guide to redcode ](https://vyznev.net/corewar/guide.html)<br>
+[Koth.org's corewars for dummies ](http://www.koth.org/info/corewars_for_dummies/dummies.html)<br>
+[Wikipedia - Core wars](https://en.wikipedia.org/wiki/Core_War)<br>
 [Corewar.io, to practice online](https://www.corewar.io/)
 
